@@ -28,17 +28,29 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+CHANNEL_LAYERS = {
+    'defaults': {
+        'BACKEND':'channels.layers.InMemoryChannelLayer',
+    }
+}
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
+    "daphne",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "django.contrib.sites",
     # Custom Installed Apps :
     'app',
+   
+    
    
 ]
 
@@ -71,6 +83,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'talkie.wsgi.application'
+
+# For handling Asynchronous Connections.
+ASGI_APPLICATION = 'talkie.asgi.application'
 
 
 # Database
