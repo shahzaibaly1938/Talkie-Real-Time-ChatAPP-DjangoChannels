@@ -36,8 +36,7 @@ MANIFEST
 *.db.sqlite3
 
 # Plugins CSS
-
-/static/css/styles.css
+css/styles.css
 
 # Local environment settings
 .env
