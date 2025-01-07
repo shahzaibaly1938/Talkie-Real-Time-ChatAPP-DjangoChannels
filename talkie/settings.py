@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     # Custom Installed Apps :
     'app',
     'accounts',
+    'chat',
    
     
    
