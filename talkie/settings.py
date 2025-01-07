@@ -34,6 +34,11 @@ CHANNEL_LAYERS = {
     }
 }
 
+AUTH_USER_MODEL = 'accounts.User'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/chat-admin/' 
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Application definition
@@ -46,9 +51,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "django.contrib.sites",
+    # "django.contrib.sites",
     # Custom Installed Apps :
     'app',
+    'accounts',
    
     
    
