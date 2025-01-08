@@ -1,24 +1,38 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="mb-6 text-xl">Login</h1>
 
-<form method="post" action=".">
-    {% csrf_token %}
+<!-- Login Form -->
+ 
 
-    <div class="mb-4">
-        <label for="id_email">Email</label>
-
-        <input type="email" name="email" id="id_email" class="w-full py-4 px-6 rounded-xl border">
-    </div>
-
-    <div class="mb-4">
-        <label for="id_password">Password</label>
-
-        <input type="password" name="password" id="id_password" class="w-full py-4 px-6 rounded-xl border">
-    </div>
-
-    {% if form.errors or form.non_field_errors %}
+<div class="hero bg-base-200 min-h-screen p-6">
+    <div class="hero-content flex-col lg:flex-row-reverse">
+      <div class="text-center lg:text-left">
+        <h1 class="text-5xl font-bold">Login now!</h1>
+        <p class="py-6">
+          Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+          quasi. In deleniti eaque aut repudiandae et a id nisi.
+        </p>
+      </div>
+      <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+            <form action="." method="post" class="card-body">
+                {% csrf_token %}
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input type="email" name="email" placeholder="email" class="input input-bordered text-cyan-300 placeholder:text-cyan-300" required />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input type="password" name="password" placeholder="password" class="input input-bordered  text-cyan-300 placeholder:text-cyan-300" required />
+            <label class="label">
+              <a href="#" class="text-cyan-300 hover:text-cyan-300 label-text-alt link link-hover">Forgot password?</a>
+            </label>
+          </div>
+          {% if form.errors or form.non_field_errors %}
         <div class="mb-4 p-6 bg-rose-100 rounded-xl">
             {% for field in form %}
                 {{ field.errors }}
@@ -27,7 +41,11 @@
             {{ form.non_field_errors }}
         </div>
     {% endif %}
-
-    <button class="py-2 px-6 bg-rose-600 text-white rounded-xl">Submit</button>
-</form>
+          <div class="form-control mt-6">
+            <button class="btn bg-cyan-300 text-gray-800 hover:text-cyan-300 hover:border-cyan-300">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 {% endblock %}

@@ -5,16 +5,20 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
           </svg></button>
     </div>
-      <div id="chat_welcome" class="hidden">
-        <input type="text" name="name" id="chat_name" placeholder="Your Name here" class="input input-bordered w-full max-w-xs" />
-        <button id="chat_join" class="btn">Join Chat</button>
+      <div id="chat_welcome" class="hidden h-[200px]">
+        <div class="w-full h-full bg-cyan-300 flex flex-col justify-between p-4 rounded-xl">
+            <h2 class="font-bold text-xl text-gray-800">Create Room & Join the Chat.</h2>
+        <input type="text" name="name" id="chat_name" placeholder="Your Name here" class="input input-bordered text-cyan-300 placeholder:text-cyan-200 w-full max-w-xs" />
+        <button id="chat_join" class="btn text-cyan-300 font-bold hover:text-gray-800 hover:bg-cyan-300">Join Chat</button>
+    </div>
     </div>
     <div id="chat_room" class="hidden">
-        <div id="chat_log" class="h-[300px] rounded-xl bg-gray-500 overflow-scroll">
-            <p>Welcome to Our Chat please type for a message and wait for agent to join.</p>
-        </div>
+        <div id="chat_log" class="h-[300px] rounded-xl bg-cyan-300 overflow-y-auto flex flex-col items-center p-4 justify-around">
+            <p class="font-bold text-gray-800">Welcome to Our Chat please type for a message and wait for agent to join.</p>
+        
 
-        <textarea id="chat_message_input" name="body" aria-placeholder="type your msg" class="textarea textarea-bordered" placeholder="Bio"></textarea>
-        <button class="btn" id="chat_message_submit">Send</button>
+        <textarea id="chat_message_input" name="body" class="textarea textarea-bordered w-full text-cyan-300 placeholder:text-cyan-300" placeholder="Type your Messages here."></textarea>
+        <button class="btn text-gray-800 w-[200px] bg-cyan-300 hover:text-cyan-300 hover:bg-gray-800" id="chat_message_submit">Send</button>
+    </div>
     </div>
 </div>
