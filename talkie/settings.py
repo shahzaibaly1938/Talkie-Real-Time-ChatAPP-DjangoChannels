@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'app',
     'accounts',
     'chat',
+    'channels'
    
     
    
@@ -93,6 +94,17 @@ WSGI_APPLICATION = 'talkie.wsgi.application'
 
 # For handling Asynchronous Connections.
 ASGI_APPLICATION = 'talkie.asgi.application'
+
+
+# Configure the channel layer
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 
 # Database

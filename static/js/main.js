@@ -64,6 +64,18 @@ async function JoinChatRoom(){
         console.log('data' , data)
     })
 
+    chatSocket = new WebSocket(`ws://${window.location.host}/ws/${chatRoomUuid}/`);
+
+    chatSocket.onmessage = function(e){
+        console.log('omMessage', e.data);
+    }
+    chatSocket.onopen = function(e){
+        console.log('onOpen - ChatSocket was opened.')
+    }
+    chatSocket.onclose = function(e){
+        console.log('onClose - ChatSocket was closed.')
+    }
+
 }
 
 
