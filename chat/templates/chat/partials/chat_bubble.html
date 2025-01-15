@@ -13,9 +13,11 @@
     </div>
     </div>
     <div id="chat_room" class="hidden">
-        <div id="chat_log" class="h-[300px] rounded-xl bg-cyan-300 overflow-y-auto flex flex-col items-center p-4 justify-around">
+        <div class="h-[300px] rounded-xl bg-cyan-300 overflow-y-auto flex flex-col items-center p-4 justify-around">
             <p class="font-bold text-gray-800">Welcome to Our Chat please type for a message and wait for agent to join.</p>
-        
+            <div class="w-full h-fit flex justify-between">
+                <div id="chat_log" class="text-xs font-bold text-gray-800 w-full justify-start"></div>
+            </div>
 
         <textarea id="chat_message_input" name="body" class="textarea textarea-bordered w-full text-cyan-300 placeholder:text-cyan-300" placeholder="Type your Messages here."></textarea>
         <button class="btn text-gray-800 w-[200px] bg-cyan-300 hover:text-cyan-300 hover:bg-gray-800" id="chat_message_submit">Send</button>

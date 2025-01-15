@@ -67,8 +67,15 @@ async function JoinChatRoom(){
     chatSocket = new WebSocket(`ws://${window.location.host}/ws/${chatRoomUuid}/`);
 
     chatSocket.onmessage = function(e){
-        console.log('omMessage', e.data);
+        console.log('onMessage');
+
+        onChatMessage(JSON.parse(e.data))
     }
+
+    chatSocket.onerror = function (e) {
+        console.error("WebSocket error:", e);
+    };
+    
     chatSocket.onopen = function(e){
         console.log('onOpen - ChatSocket was opened.')
     }
@@ -77,6 +84,56 @@ async function JoinChatRoom(){
     }
 
 }
+
+
+function sendMessage(){
+    chatSocket.send(JSON.stringify({
+        'type': 'message',
+        'message' : chatInputElement.value,
+        'name' : chatName,
+    }))
+
+    chatInputElement.value = '';
+}
+
+
+function onChatMessage(data){
+    console.log("OnChatMessage", data);
+
+    if (data.type == 'chat_message'){
+        if (data.agent){
+
+            chatLogElement.innerHTML += `<div class="flex w-full mt-2 space-x-3 max-w-md">
+
+              <div class="flex-shrink-0 h-10 w-10 text-lg rounded-full bg-gray-300 flex items-center justify-center text-gray-800">${data.initials}</div>
+            
+            <div>
+            <div class="bg-gray-300 p-3 rounded-l-lg rounded-br-lg ">
+            <p class="text-sm">${data.message}</p>
+            </div>
+            <span class=" text-gray-500 mt-4 leading-none">${data.created_at} ago</span>
+            </div>
+          
+            </div>`
+
+        } else {
+         
+            chatLogElement.innerHTML += `<div class="flex w-full mt-2 space-x-3 max-w-md ml-auto justify-end">
+            
+            <div>
+            <div class="bg-blue-300 p-3 rounded-l-lg rounded-br-lg ">
+            <p class="text-sm">${data.message}</p>
+            </div>
+            <span class=" text-gray-500 mt-4 leading-none">${data.created_at} ago</span>
+            </div>
+            <div class="flex-shrink-0 h-10 w-10 text-lg rounded-full bg-gray-300 flex items-center justify-center text-gray-800">${data.initials}</div>
+            </div>`
+        }
+    }
+
+}
+
+
 
 
 // Event Listeners
@@ -98,6 +155,15 @@ chatJoinElement.onclick = function(e){
 
     JoinChatRoom();
 
+
+    return false
+}
+
+
+chatSubmitElement.onclick = function(e){
+    e.preventDefault();
+
+    sendMessage();
 
     return false
 }
