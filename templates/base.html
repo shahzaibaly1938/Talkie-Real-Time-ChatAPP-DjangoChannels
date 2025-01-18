@@ -19,6 +19,10 @@
 
     {% endblock %}
 
-<script src="{% static 'js/main.js' %}"></script>
+    {% block script %}
+        <script src="{% static 'js/main.js' %}"></script>
+        
+
+    {% endblock %}
 </body>
 </html>
