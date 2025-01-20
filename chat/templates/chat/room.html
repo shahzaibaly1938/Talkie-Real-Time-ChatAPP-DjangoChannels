@@ -16,7 +16,7 @@ Room | Talkie
     <b>Name: </b>{{room.client}} <br>
     <b>Started: </b>{{room.created_at|timesince }} ago<br>
     <b>Status: </b>{{room.get_status_display}} <br>
-    <b>Agent: </b>{% firstof room.created_by.name 'None yet!' %} <br>
+    <b>Agent: </b>{% firstof room.agent.name 'None yet!' %} <br>
 </p>
 
 <hr class="mb-6">

@@ -11,8 +11,9 @@ Admin | Talkie
 {% if perms.user.add_user %}
 <div >
     <h1 class="text-2xl">Users</h1>
+    <a href="{% url 'chat:add_user' %}">
     <button class="btn">Add User</button>
-
+    </a>
     <div class="overflow-x-auto">
         <table class="table">
           <!-- head -->
@@ -29,10 +30,10 @@ Admin | Talkie
             {% for user in users %}
 
             <tr class="{% cycle 'bg-gray-700' '' %}">
-              <td>{{user.name}}</td>
+              <td><a href="{% url 'chat:user_detail' user.pk %}">{{user.name}}</a></td>
               <td>{{user.email}}</td>
               <td>{{user.role}}</td>
-              <td><a href="#">Edit</a></td>
+              <td><a href="{% url 'chat:edit_user' user.pk %}">Edit</a></td>
             </tr>
             {% endfor %}
           </tbody>
@@ -46,7 +47,7 @@ Admin | Talkie
 
 <div class="mt-8">
     <h2 class="mb-4 text-lg">Rooms</h2>
-    {% include 'chat/partials/room_list.html' %}
+    {% include 'chat/partials/room_list.html' %} 
 </div>
 
 {% endblock %}
