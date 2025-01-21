@@ -22,6 +22,15 @@ class ChatConsumer(AsyncWebsocketConsumer):
         await self.accept()
         print(f"Connected to room: {self.room_name}")  # Debug log
 
+        #Inform User
+        if self.user.is_staff:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type':'users_update'
+                }
+            )
+
     async def disconnect(self, close_code):
         # Leave Room
         print(f"Disconnected from room: {self.room_name}")  # Debug log
@@ -58,6 +67,20 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 }
             )
             print(f"Message sent to group: {self.room_group_name}")
+        
+        elif type == 'update':
+            #Send Update to th Room
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'writing_active',
+                    'message':message,
+                    'name':name,
+                    'agent':agent,
+                    'initials':initials(name),
+                }
+            )
+
         else:
             print(f'message type: {type}')
 
@@ -75,7 +98,27 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'created_at' : event['created_at'],
         }))
 
+    async def writing_active(self, event):
+        #Send writing is active to room
+        await self.send(text_data=json.dumps(
+            {
+            'type': event['type'],
+            'message' : event['message'],
+            'name' : event['name'],
+            'agent' : event['agent'],
+            'initials' : event['initials'],   
+            }
+        ))
 
+
+
+    async def users_update(self, event):
+        #Send information to the WebSocket
+        await self.send(text_data=json.dumps(
+            {
+                'type':'users_update'
+            }
+        ))
     
 
 

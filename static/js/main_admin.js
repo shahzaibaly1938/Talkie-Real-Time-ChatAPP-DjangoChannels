@@ -21,6 +21,10 @@ function onChatMessage(data){
     console.log("OnChatMessage", data);
 
     if (data.type == 'chat_message'){
+        let tmpInfo = document.querySelector('.tmp-info')
+        if (tmpInfo){
+            tmpInfo.remove()
+        }
         if (!data.agent){
 
             chatLogElement.innerHTML += `<div class="flex w-full mt-2 space-x-3 max-w-md">
@@ -31,7 +35,7 @@ function onChatMessage(data){
             <div class="bg-gray-300 p-3 rounded-l-lg rounded-br-lg ">
             <p class="text-sm">${data.message}</p>
             </div>
-            <span class=" text-gray-500 mt-4 leading-none">${data.created_at} ago</span>
+            <span class=" text-black mt-4 leading-none">${data.created_at} ago</span>
             </div>
           
             </div>`
@@ -44,11 +48,32 @@ function onChatMessage(data){
             <div class="bg-blue-300 p-3 rounded-l-lg rounded-br-lg ">
             <p class="text-sm">${data.message}</p>
             </div>
-            <span class=" text-gray-500 mt-4 leading-none">${data.created_at} ago</span>
+            <span class=" text-black mt-4 leading-none">${data.created_at} ago</span>
             </div>
             <div class="flex-shrink-0 h-10 w-10 text-lg rounded-full bg-gray-300 flex items-center justify-center text-gray-800">${data.initials}</div>
             </div>`
         }
+    }
+    else if (data.type == 'writing_active'){
+        if (!data.agent){
+            let tmpInfo = document.querySelector('.tmp-info')
+            if (tmpInfo){
+                tmpInfo.remove()
+            }
+
+            chatLogElement.innerHTML += `<div class="tmp-info flex w-full mt-2 space-x-3 max-w-md">
+
+            <div class="flex-shrink-0 h-10 w-10 text-lg rounded-full bg-gray-300 flex items-center justify-center text-gray-800">${data.initials}</div>
+          
+          <div>
+          <div class="bg-gray-300 p-3 rounded-l-lg rounded-br-lg ">
+          <p class="text-sm">The User is Writing a Message.</p>
+          </div>
+          </div>
+        
+          </div>`
+        }
+
     }
 
     scrollToBottom();
@@ -106,3 +131,23 @@ chatInputElement.onkeyup = function(e){
         sendMessage()
     }
 }
+
+// chatInputElement.onfocus = function(e){
+//     console.log("sendingg ")
+//     chatSocket.send(JSON.stringify({
+//         'type': 'update',
+//         'message' : 'writing_active',
+//         'name' : document.querySelector('#user_name').textContent.replaceAll('"',''),
+//         'agent' : document.querySelector('#user_id').textContent.replaceAll('"',''),
+//     }))
+//     console.log("send sucess")
+// }
+
+chatInputElement.addEventListener('focus', function(){
+    chatSocket.send(JSON.stringify({
+        'type': 'update',
+        'message' : 'writing_active',
+        'name' : document.querySelector('#user_name').textContent.replaceAll('"',''),
+        'agent' : document.querySelector('#user_id').textContent.replaceAll('"',''),
+    }))
+});
