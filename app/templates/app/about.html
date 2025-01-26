@@ -5,5 +5,18 @@ About | Talkie
 {% endblock %}
 
 {% block content %}
-<h1>This is About</h1>
+{% load static %}
+<div
+  class="hero min-h-screen bg-[url('{% static 'images/background.jpg' %}')] bg-cover">
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">About Talkie</h1>
+      <p class="mb-5">
+        Talkie is a Website Where you can Create or Join a Room and Talk to anyone using Realtime messages.
+      </p>
+      <button class="btn btn-primary">Join</button>
+    </div>
+  </div>
+</div>
 {% endblock %}

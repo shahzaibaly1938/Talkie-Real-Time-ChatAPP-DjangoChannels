@@ -1,11 +1,9 @@
 <div class="navbar bg-base-100">
     <div class="flex-1">
-      <a class="btn btn-ghost text-xl">Talkie</a>
+      <a href="{% url 'home_page' %}" class="btn btn-ghost text-xl">Talkie</a>
     </div>
     <div class="flex-none gap-2">
-      <div class="form-control">
-        <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
-      </div>
+     
       {% if request.user.is_authenticated %}
       <div class="dropdown dropdown-end">
         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
@@ -30,6 +28,10 @@
           
         </ul>
       </div>
+      {% else %}
+      <a href="{% url 'account:login' %}">
+      <div class="btn p-4">ADMIN</div>
+    </a>
       {% endif %}
     </div>
   </div>
